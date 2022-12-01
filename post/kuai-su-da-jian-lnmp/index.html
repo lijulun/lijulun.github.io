@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" >
+
+<title>快速使用Docker搭建LNMP环境 | Nelson</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<link rel="shortcut icon" href="https://lijulun.github.io/favicon.ico?v=1669763778898">
+<link rel="stylesheet" href="https://lijulun.github.io/styles/main.css">
+
+
+
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+
+
+
+    <meta name="description" content="搜索相关镜像
+$ docker search php
+
+apple@192 ~ % docker search php
+NAME                                 DESCRIPTION            ..." />
+    <meta name="keywords" content="Docker" />
+  </head>
+  <body>
+    <div id="app" class="main">
+
+      <div class="sidebar" :class="{ 'full-height': menuVisible }">
+  <div class="top-container" data-aos="fade-right">
+    <div class="top-header-container">
+      <a class="site-title-container" href="https://lijulun.github.io">
+        <img src="https://lijulun.github.io/images/avatar.png?v=1669763778898" class="site-logo">
+        <h1 class="site-title">Nelson</h1>
+      </a>
+      <div class="menu-btn" @click="menuVisible = !menuVisible">
+        <div class="line"></div>
+      </div>
+    </div>
+    <div>
+      
+        
+          <a href="/" class="site-nav">
+            首页
+          </a>
+        
+      
+        
+          <a href="https://lijulun.github.io/post/fen-lei" class="site-nav">
+            分类
+          </a>
+        
+      
+        
+          <a href="/archives" class="site-nav">
+            归档
+          </a>
+        
+      
+        
+          <a href="/tags" class="site-nav">
+            标签
+          </a>
+        
+      
+        
+          <a href="/post/about" class="site-nav">
+            关于
+          </a>
+        
+      
+    </div>
+  </div>
+  <div class="bottom-container" data-aos="flip-up" data-aos-offset="0">
+    <div class="social-container">
+      
+        
+          <a class="social-link" href="https://github.com/lijulun" target="_blank">
+            <i class="fab fa-github"></i>
+          </a>
+        
+      
+        
+      
+        
+          <a class="social-link" href="https://weibo.com/u/5582521662" target="_blank">
+            <i class="fab fa-weibo"></i>
+          </a>
+        
+      
+        
+      
+        
+      
+    </div>
+    <div class="site-description">
+       🇨🇳 <b>China ChangSha</b>・🕹<b>Web developer</b>
+    </div>
+    <div class="site-footer">
+      Powered by <a href="https://github.com/getgridea/gridea" target="_blank">Gridea</a> | <a class="rss" href="https://lijulun.github.io/atom.xml" target="_blank">RSS</a>
+    </div>
+  </div>
+</div>
+
+
+      <div class="main-container">
+        <div class="content-container" data-aos="fade-up">
+          <div class="post-detail">
+            <h2 class="post-title">快速使用Docker搭建LNMP环境</h2>
+            <div class="post-date">2022-11-20</div>
+            
+            <div class="post-content" v-pre>
+              <h1 id="搜索相关镜像">搜索相关镜像</h1>
+<pre><code>$ docker search php
+
+apple@192 ~ % docker search php
+NAME                                 DESCRIPTION                                     STARS     OFFICIAL   AUTOMATED
+webdevops/php-nginx                  Nginx with PHP-FPM                              240                  [OK]
+webdevops/php-apache-dev             PHP with Apache for Development (eg. with xd…   151                  [OK]
+bitnami/php-fpm                      Bitnami PHP-FPM Docker Image                    151                  [OK]
+webdevops/php-apache                 Apache with PHP-FPM (based on webdevops/php)    129                  [OK]
+bitnami/phpmyadmin                   Bitnami Docker Image for phpMyAdmin             37                   [OK]
+circleci/php                         CircleCI images for PHP                         35
+webdevops/php-nginx-dev              PHP with Nginx for Development (eg. with xde…   29                   [OK]
+bitnami/phpbb                        Bitnami Docker Image for phpBB                  25                   [OK]
+webdevops/php                        PHP (FPM and CLI) service container             25                   [OK]
+dockage/phppgadmin                   phpPgAdmin Docker image, phpPgAdmin is a web…   18                   [OK]
+</code></pre>
+<h1 id="拉去相关镜像至本地">拉去相关镜像至本地</h1>
+<pre><code>apple@192 ~ % docker pull bitnami/redis
+Using default tag: latest
+latest: Pulling from bitnami/redis
+1d8866550bdd: Pull complete
+f3cd6fe624df: Pull complete
+Digest: sha256:121931b129e3c0ba715b7826b577d272bda3480ac1d593dd2b966dbd52f335e7
+Status: Downloaded newer image for bitnami/redis:latest
+docker.io/bitnami/redis:latest
+</code></pre>
+<h1 id="查看本地当前镜像">查看本地当前镜像</h1>
+<pre><code>apple@192 ~ % docker images
+REPOSITORY          TAG       IMAGE ID       CREATED         SIZE
+bitnami/redis       latest    6f12d40540ba   14 hours ago    114MB
+mysql               5.7       73ab1e19d382   2 weeks ago     495MB
+nginx               1.23      5d58c024174d   2 weeks ago     142MB
+composer            2.4.3     93cce8060354   2 weeks ago     201MB
+php                 8.1-fpm   fa1b5d320fa7   4 weeks ago     450MB
+arodax/php8.0-fpm   latest    4741693e49cb   12 months ago   901MB
+</code></pre>
+<h1 id="查看本地当前容器">查看本地当前容器</h1>
+<pre><code>apple@192 ~ % docker ps   //正在执行
+CONTAINER ID   IMAGE          COMMAND                  CREATED          STATUS          PORTS                    NAMES
+b44dac3b6eb8   5d58c024174d   &quot;/docker-entrypoint.…&quot;   11 minutes ago   Up 11 minutes   0.0.0.0:80-&gt;80/tcp       nginx1.23
+cb2c59115598   4741693e49cb   &quot;docker-php-entrypoi…&quot;   34 hours ago     Up 18 minutes   0.0.0.0:9000-&gt;9000/tcp   php8.0-fpm
+3e83fc198610   73ab1e19d382   &quot;docker-entrypoint.s…&quot;   38 hours ago     Up 18 minutes   3306/tcp, 33060/tcp      mysql5.7
+apple@192 ~ % docker ps -a //包括没执行的
+CONTAINER ID   IMAGE          COMMAND                  CREATED          STATUS          PORTS                    NAMES
+b44dac3b6eb8   5d58c024174d   &quot;/docker-entrypoint.…&quot;   11 minutes ago   Up 11 minutes   0.0.0.0:80-&gt;80/tcp       nginx1.23
+cb2c59115598   4741693e49cb   &quot;docker-php-entrypoi…&quot;   34 hours ago     Up 18 minutes   0.0.0.0:9000-&gt;9000/tcp   php8.0-fpm
+3e83fc198610   73ab1e19d382   &quot;docker-entrypoint.s…&quot;   38 hours ago     Up 18 minutes   3306/tcp, 33060/tcp      mysql5.7
+</code></pre>
+<h1 id="创建mysql容器">创建MYsql容器</h1>
+<pre><code>docker run -p 3306:3306 --name my-mysql -v /usr/local/docker/mysql/conf:/etc/mysql -v /usr/local/docker/mysql/logs:/var/log/mysql 
+-v /usr/local/docker/mysql/data:/var/lib/mysql -e MYSQL_ROOT_PASSWORD=123456 -d mysql:5.7
+</code></pre>
+<h1 id="创建php容器">创建PHP容器</h1>
+<pre><code>docker run --name my-php-fpm -d -p 9000:9000 --link my-mysql:mysql -v /home/lk/data/apps/works/php-apps/wwwroot:/usr/share/nginx/html php:7.2-fpm
+</code></pre>
+<h1 id="创建nginx容器">创建Nginx容器</h1>
+<pre><code>docker run --name nginx-test -p 8080:80 -d nginx
+</code></pre>
+
+            </div>
+            
+              <div class="tag-container">
+                
+                  <a href="https://lijulun.github.io/tag/QEvK9o-ut/" class="tag">
+                    Docker
+                  </a>
+                
+              </div>
+            
+            
+
+            
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script type="application/javascript">
+
+AOS.init();
+
+var app = new Vue({
+  el: '#app',
+  data: {
+    menuVisible: false,
+  },
+})
+
+</script>
+
+
+
+
+
+
+  </body>
+</html>
